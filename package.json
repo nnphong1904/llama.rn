@@ -1,5 +1,5 @@
 {
-  "name": "llama.rn",
+  "name": "pllama.rn",
   "version": "0.4.3",
   "description": "React Native binding of llama.cpp",
   "main": "lib/commonjs/index",
