@@ -21,11 +21,10 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = package["author"]
 
-  s.platforms    = { :ios => "11.0", :tvos => "11.0", :macos => '13.5' }
-  s.source       = { :git => "https://github.com/nnphong1904/llama.rn", :tag => "#{s.version}" }
-  s.frameworks = ['Foundation', 'AppKit'] # Use AppKit for macOS
+  s.platforms    = { :ios => "11.0", :tvos => "11.0", :osx => "11.5" }
+  s.source       = { :git => "https://github.com/mybigday/llama.rn.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp,hpp,c,m,mm}", "macos/**/*.{h,m,mm}"
+  s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp,hpp,c,m,mm}"
   s.resources = "cpp/**/*.{metallib}"
 
   s.dependency "React-Core"
@@ -36,6 +35,11 @@ Pod::Spec.new do |s|
     "OTHER_CFLAGS" => base_optimizer_flags,
     "OTHER_CPLUSPLUSFLAGS" => base_optimizer_flags
   }
+
+  if ENV['RCT_NEW_ARCH_ENABLED'] == '1' && s.platforms[':osx'].nil?
+    s.dependency "React-Codegen"
+  end
+
 
   # Don't install the dependencies when we run `pod install` in the old architecture.
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
@@ -48,7 +52,6 @@ Pod::Spec.new do |s|
       "OTHER_CFLAGS" => base_optimizer_flags,
       "OTHER_CPLUSPLUSFLAGS" => new_arch_cpp_flags + " " + base_optimizer_flags
     }
-    s.dependency "React-Codegen"
     s.dependency "RCT-Folly"
     s.dependency "RCTRequired"
     s.dependency "RCTTypeSafety"
