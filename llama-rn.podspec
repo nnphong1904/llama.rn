@@ -21,8 +21,9 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = package["author"]
 
-  s.platforms    = { :ios => "11.0", :tvos => "11.0", 'macos' => '10.15' }
-  s.source       = { :git => "https://github.com/mybigday/llama.rn.git", :tag => "#{s.version}" }
+  s.platforms    = { :ios => "11.0", :tvos => "11.0", :macos => '13.5' }
+  s.source       = { :git => "https://github.com/nnphong1904/llama.rn", :tag => "#{s.version}" }
+  s.frameworks = ['Foundation', 'AppKit'] # Use AppKit for macOS
 
   s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp,hpp,c,m,mm}", "macos/**/*.{h,m,mm}"
   s.resources = "cpp/**/*.{metallib}"
